@@ -67,6 +67,13 @@ export interface LLMP extends LightningLane {
   end: DateTime;
 }
 
+export interface LLSP extends LightningLane {
+  type: 'LL';
+  subtype: 'SP';
+  start: DateTime;
+  end: DateTime;
+}
+
 export interface DasBooking extends BaseBooking {
   type: 'DAS';
   subtype: 'IN_PARK' | 'ADVANCE';
@@ -184,6 +191,10 @@ interface ItineraryResponse {
 
 export function isLLMP(booking: Booking): booking is LLMP {
   return booking.type === 'LL' && booking.subtype === 'MP';
+}
+
+export function isLLSP(booking: Booking): booking is LLSP {
+  return booking.type === 'LL' && booking.subtype === 'SP';
 }
 
 export function isDAS(booking: Booking): booking is DasBooking {
@@ -329,12 +340,13 @@ export class ItineraryClient extends ApiClient {
         ({ FLEX: 'MP', STANDARD: 'SP', OTHER: 'OTHER' } as const)[item.kind] ??
         'OTHER';
       const isMP = subtype === 'MP';
+      const isSP = subtype === 'SP';
       let booking: LightningLane = {
         type: 'LL',
         subtype,
         ...getFastPass(item),
         cancellable: item.cancellable && isMP,
-        modifiable: item.modifiable && isMP,
+        modifiable: item.modifiable && (isMP || isSP),
       };
       if (item.showStartDateTime && item.showEndDateTime) {
         booking.showTimeInfo = {
