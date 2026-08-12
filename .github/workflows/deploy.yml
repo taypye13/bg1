@@ -32,10 +32,28 @@ jobs:
       - name: Build
         run: npm run build
 
+      # ✅ This creates the missing index.html after the build
+      - name: Create index.html
+        run: |
+          cat > dist/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+            <title>BG1</title>
+            <link rel="stylesheet" href="bg1.css">
+          </head>
+          <body>
+            <script type="module" src="bg1.js"></script>
+          </body>
+          </html>
+          EOF
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist   # ✅ Correct for YOUR config since outDir is '../dist'
+          path: ./dist
 
   deploy:
     environment:
