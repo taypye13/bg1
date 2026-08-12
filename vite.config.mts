@@ -7,10 +7,6 @@ import obfuscatorPlugin from 'vite-plugin-javascript-obfuscator';
 const server = {
   host: '0.0.0.0',
   port: 3000,
-  https: {
-    cert: './tls/dev.cert',
-    key: './tls/dev.key',
-  },
   headers: {
     'Access-Control-Allow-Origin': '*',
   },
