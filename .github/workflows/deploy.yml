@@ -4,6 +4,9 @@ on:
   push:
     branches: [ feature/llsp-manager ]
 
+permissions:
+  contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -13,18 +16,13 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install dependencies
         run: npm install
 
       - name: Create diu.ts placeholder
-        run: |
-          cat > src/api/diu.ts << 'EOFINNER'
-          export default async function diu(_offerId: string): Promise<object> {
-            return {};
-          }
-          EOFINNER
+        run: echo 'export default async function diu(_offerId: string): Promise<object> { return {}; }' > src/api/diu.ts
 
       - name: Build
         run: npm run build
