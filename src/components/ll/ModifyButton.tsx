@@ -1,6 +1,6 @@
 import { use } from 'react';
 
-import { Booking, isLLMP } from '@/api/itinerary';
+import { Booking, isLLMP, isLLSP } from '@/api/itinerary';
 import BookingDateContext from '@/contexts/BookingDateContext';
 import ClientsContext from '@/contexts/ClientsContext';
 import NavContext, { NavError } from '@/contexts/NavContext';
@@ -28,7 +28,7 @@ export default function ModifyButton({ booking, ...buttonProps }: Props) {
   return ll.rules.book &&
     booking.modifiable &&
     !rebooking.auto &&
-    isLLMP(booking) ? (
+    (isLLMP(booking) || isLLSP(booking)) ? (
     <Button
       {...buttonProps}
       onClick={async () => {
