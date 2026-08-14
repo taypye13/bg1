@@ -1,6 +1,6 @@
 import { use, useEffect, useState } from 'react';
 
-import { LLMP, Offer } from '@/api/ll';
+import { LLMP, LLSP, Offer } from '@/api/ll';
 import Button from '@/components/Button';
 import LandLine from '@/components/LandLine';
 import Screen from '@/components/Screen';
@@ -16,12 +16,12 @@ import BookNewReturnTime from './BookNewReturnTime';
 import RefreshButton from './RefreshButton';
 import SelectReturnTime from './SelectReturnTime';
 
-export default function ChangeBookingTime({ booking }: { booking: LLMP }) {
+export default function ChangeBookingTime({ booking }: { booking: LLMP | LLSP }) {
   const { goTo } = use(NavContext);
   const rebooking = use(RebookingContext);
   const { ll } = use(ClientsContext);
   const { loadData, loaderElem } = useDataLoader();
-  const [offer, setOffer] = useState<Offer<LLMP>>();
+  const [offer, setOffer] = useState<Offer<LLMP | LLSP | undefined>>();
 
   useEffect(() => {
     const end = rebooking.end;
@@ -34,11 +34,11 @@ export default function ChangeBookingTime({ booking }: { booking: LLMP }) {
     });
   }, [booking, ll, loadData]);
 
-  return offer ? (
+return offer ? (
     <SelectReturnTime
       offer={offer}
       onOfferChange={offer => {
-        goTo(<BookNewReturnTime offer={offer} />);
+        if (offer.booking) goTo(<BookNewReturnTime offer={offer as Offer<LLMP | LLSP>} />);
       }}
     />
   ) : (

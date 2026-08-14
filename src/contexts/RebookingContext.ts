@@ -1,11 +1,11 @@
 import { createContext } from 'react';
 
-import { LLMP } from '@/api/itinerary';
+import { LLMP, LLSP } from '@/api/itinerary';
 
 export interface Rebooking {
-  current: LLMP | undefined;
+  current: LLMP | LLSP | undefined;
   auto: boolean;
-  begin: (booking: LLMP, auto?: boolean) => void;
+  begin: (booking: LLMP | LLSP, auto?: boolean) => void;
   end: () => void;
 }
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { LLMP } from '@/api/itinerary';
+import { LLMP, LLSP } from '@/api/itinerary';
 import RebookingContext, { Rebooking } from '@/contexts/RebookingContext';
 
 export default function RebookingProvider({
@@ -13,7 +13,7 @@ export default function RebookingProvider({
   const [rebooking, setRebooking] = useState<Rebooking>(() => ({
     current: undefined,
     auto: false,
-    begin: (booking: LLMP, auto = false) => {
+    begin: (booking: LLMP | LLSP, auto = false) => {
       setRebooking(rb =>
         booking === rb.current ? rb : { ...rb, current: booking, auto }
       );
