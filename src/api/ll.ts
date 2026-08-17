@@ -4,10 +4,11 @@ import kvdb from '@/kvdb';
 import { authStore } from './auth';
 import { avatarUrl } from './avatar';
 import { ApiClient } from './client';
-import { Booking, LLMP, LLSP, isLLMP } from './itinerary';
+import { Booking, LLMP, LLSP, isLLMP, isLLSP } from './itinerary';
 import { Experience as ExpData, InvalidId, Park, Resort } from './resort';
 
 export type { LLMP, LLSP };
+export { isLLMP, isLLSP };
 
 interface Standby {
   available?: boolean;
