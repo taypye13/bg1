@@ -104,7 +104,7 @@ describe('App', () => {
     renderComponent();
     await waitFor(() => {
       expect(navigate).toHaveBeenCalledWith(
-        'https://joelface.github.io/bg1/start.html'
+        'https://taypye13.github.io/bg1/start.html'
       );
     });
   });
