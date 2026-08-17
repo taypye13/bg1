@@ -24,8 +24,7 @@ export default defineConfig({
     outDir: '../dist',
     emptyOutDir: false,
     rollupOptions: {
-      input: ['src/bg1.tsx', 'src/bg1.css', 'src/responder.html'],
-      output: {
+      input: ['src/bg1.tsx', 'src/bg1.css', 'src/responder.html', 'src/start.html'],
         entryFileNames: '[name].js',
         chunkFileNames: '[name].js',
         assetFileNames: '[name][extname]',
