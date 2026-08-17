@@ -25,12 +25,11 @@ export default defineConfig({
     emptyOutDir: false,
     rollupOptions: {
       input: ['src/bg1.tsx', 'src/bg1.css', 'src/responder.html', 'src/start.html'],
-        entryFileNames: '[name].js',
-        chunkFileNames: '[name].js',
-        assetFileNames: '[name][extname]',
-      },
-    },
-  },
+      entryFileNames: '[name].js',
+      chunkFileNames: '[name].js',
+      assetFileNames: '[name][extname]',
+    },                          // ← closes rollupOptions
+  },                            // ← closes build
   esbuild: {
     charset: 'ascii',
   },
