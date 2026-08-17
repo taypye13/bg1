@@ -22,7 +22,7 @@ export default defineConfig({
   },
   build: {
     outDir: '../dist',
-    emptyOutDir: false,
+    emptyOutDir: true,
     rollupOptions: {
       input: ['src/bg1.tsx', 'src/bg1.css', 'src/responder.html', 'src/start.html'],
       entryFileNames: '[name].js',
